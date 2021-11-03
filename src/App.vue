@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="office">
-      <Map @table-click="handleTableClick" />
+      <Map
+        @table-click="handleTableClick"
+        @update:isUserOpenned="handleCloseClick"
+      />
       <SideMenu
         :person="person"
         :isUserOpenned="isUserOpenned"

@@ -31,6 +31,7 @@ export default {
       tables: [],
       legend: [],
       tableSvg: null,
+      tableNodes: [],
     };
   },
   mounted() {
@@ -46,6 +47,8 @@ export default {
     } else {
       console.log("error");
     }
+
+    this.svg.on("mousedown", this.handleClickOutside);
   },
   methods: {
     drawTables() {
@@ -69,11 +72,23 @@ export default {
             legend.find((it) => it.group_id === table.group_id)?.color ??
               "transparent"
           );
+
+        this.tableNodes.splice(0, 0, svgTable.node());
       });
     },
     handleClick(evt) {
       const id = evt.currentTarget.getAttribute("id");
       this.$emit("table-click", id);
+    },
+    handleClickOutside(evt) {
+      if (
+        this.tableNodes.some(
+          (node) => node === evt.currentTarget || node.contains(evt.target)
+        )
+      ) {
+        return;
+      }
+      this.$emit("update:isUserOpenned", false);
     },
   },
 };
