@@ -56,7 +56,8 @@ export default {
           .append("g")
           .attr("transform", `translate(${table.x}, ${table.y}) scale(0.5)`)
           .attr("id", table._id)
-          .classed("employer-place", true);
+          .classed("employer-place", true)
+          .on("click", this.handleClick);
 
         svgTable
           .append("g")
@@ -69,8 +70,10 @@ export default {
               "transparent"
           );
       });
-
-      console.log(svgTablesGroup);
+    },
+    handleClick(evt) {
+      const id = evt.currentTarget.getAttribute("id");
+      this.$emit("table-click", id);
     },
   },
 };
