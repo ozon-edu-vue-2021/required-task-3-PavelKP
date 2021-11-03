@@ -79,8 +79,7 @@ export default {
     this.loadLegend();
   },
   mounted() {
-    this.makeChart();
-    this.makePie();
+    this.makeCharts();
   },
   methods: {
     loadLegend() {
@@ -89,7 +88,7 @@ export default {
     closeProfile() {
       this.$emit("update:isUserOpenned", false);
     },
-    makeChart() {
+    makeCharts() {
       const chartData = {
         labels: this.legend.map((legendItem) => legendItem.text),
         datasets: [
@@ -106,8 +105,8 @@ export default {
         },
       };
       this.$refs.chart.renderChart(chartData, options);
+      this.$refs.pie.renderChart(chartData, options);
     },
-    makePie() {},
   },
 };
 </script>
