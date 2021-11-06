@@ -3,13 +3,12 @@
     <div class="office">
       <Map
         @table-click="handleTableClick"
-        @update:isUserOpenned="handleCloseClick"
+        :isUserOpenned.sync="isUserOpenned"
       />
       <SideMenu
-        :person="person"
-        :isUserOpenned="isUserOpenned"
-        @update:isUserOpenned="handleCloseClick"
-      />
+				:person="person" 
+				:isUserOpenned.sync="isUserOpenned" 
+			/>
     </div>
   </div>
 </template>
@@ -36,9 +35,6 @@ export default {
     handleTableClick(id) {
       this.person = this.people.find((person) => person._id === +id);
       this.isUserOpenned = true;
-    },
-    handleCloseClick() {
-      this.isUserOpenned = false;
     },
   },
   mounted() {
